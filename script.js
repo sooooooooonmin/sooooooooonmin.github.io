@@ -44,4 +44,4 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts', {
     petitionList.innerHTML = "<p>게시물이 없습니다.</p>"; // 게시물이 없을 때 메시지 표시
   }
 })
-.catch(error => console.error('Error fetching Padlet posts:', e
+.catch(error => console.error('Error fetching Padlet posts:', error));
