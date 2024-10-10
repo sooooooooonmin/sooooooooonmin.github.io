@@ -11,60 +11,46 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts', {
   return response.json();
 })
 .then(data => {
-  console.log(data);
+  console.log(data); // 전체 API 응답 데이터 출력
   const petitionList = document.getElementById('petition-list');
 
+  // included 배열에서 posts 가져오기
   if (data.included && Array.isArray(data.included)) {
+    // 'post' 타입의 데이터 필터링
     const posts = data.included.filter(item => item.type === 'post');
 
     if (posts.length > 0) {
+      // 모든 게시물 가져와서 표시하기
       posts.forEach(post => {
-        if (post.attributes && post.attributes.content) {
+        if (post.attributes && post.attributes.content) { // 객체 유효성 검사 추가
           const petitionElement = document.createElement('div');
           petitionElement.classList.add('petition');
-          const postUrl = post.webUrl && post.webUrl.live ? post.webUrl.live : '#';
+          const postUrl = post.webUrl && post.webUrl.live ? post.webUrl.live : '#'; // URL 유효성 검사
+          
+          // 지지자 수와 댓글 수 추출
+          const supportersCount = post.attributes.supporterCount || 0;
+          const comments = post.attributes.comments || [];
 
           petitionElement.innerHTML = `
             <h3>${post.attributes.content.subject || '제목 없음'}</h3>
             <p>${post.attributes.content.bodyHtml.replace(/<[^>]+>/g, '').substring(0, 100) || '내용 없음'}...</p>
-            <a href="#" class="details-link" data-title="${post.attributes.content.subject}" data-body="${post.attributes.content.bodyHtml}">자세히 보기</a>
+            <p><strong>지지자 수:</strong> ${supportersCount}</p>
+            <a href="${postUrl}" target="_blank">자세히 보기</a>
+            <div class="comments">
+              <strong>댓글:</strong>
+              ${comments.length > 0 ? comments.map(comment => `<div class="comment">${comment}</div>`).join('') : '<p>댓글이 없습니다.</p>'}
+            </div>
           `;
           petitionList.appendChild(petitionElement);
+        } else {
+          console.error('Post attributes are undefined:', post); // 디버깅을 위한 로그 추가
         }
       });
     } else {
-      petitionList.innerHTML = "<p>게시물이 없습니다.</p>";
+      petitionList.innerHTML = "<p>게시물이 없습니다.</p>"; // 게시물이 없을 때 메시지 표시
     }
   } else {
-    petitionList.innerHTML = "<p>게시물이 없습니다.</p>";
+    petitionList.innerHTML = "<p>게시물이 없습니다.</p>"; // 게시물이 없을 때 메시지 표시
   }
 })
 .catch(error => console.error('Error fetching Padlet posts:', error));
-
-// 모달 관련 코드
-const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
-const modalBody = document.getElementById('modal-body');
-const closeButton = document.getElementById('close-button');
-
-// "자세히 보기" 링크 클릭 시
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('details-link')) {
-    event.preventDefault(); // 기본 링크 클릭 동작 방지
-    modalTitle.textContent = event.target.getAttribute('data-title');
-    modalBody.innerHTML = event.target.getAttribute('data-body'); // HTML 내용으로 설정
-    modal.style.display = 'block'; // 모달 표시
-  }
-});
-
-// 모달 닫기 버튼 클릭 시
-closeButton.addEventListener('click', function() {
-  modal.style.display = 'none'; // 모달 숨김
-});
-
-// 모달 외부 클릭 시 닫기
-window.addEventListener('click', function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none'; // 모달 숨김
-  }
-});
