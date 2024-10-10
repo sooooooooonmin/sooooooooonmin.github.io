@@ -25,7 +25,7 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts', {
         if (post.attributes && post.attributes.content) { // 객체 유효성 검사 추가
           const petitionElement = document.createElement('div');
           petitionElement.classList.add('petition');
-          const postUrl = post.webUrl && post.webUrl.live ? post.webUrl.live : '#'; // URL 유효성 검사
+          const postUrl = (post.webUrl && post.webUrl.live) ? post.webUrl.live : '#'; // URL 유효성 검사
 
           petitionElement.innerHTML = `
             <h3>${post.attributes.content.subject || '제목 없음'}</h3>
