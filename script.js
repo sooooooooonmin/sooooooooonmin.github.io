@@ -8,15 +8,25 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts%2Csections'
 .then(response => response.json())
 .then(data => {
   const petitionList = document.getElementById('petition-list');
-  data.posts.forEach(post => {
-    const petitionElement = document.createElement('div');
-    petitionElement.classList.add('petition');
-    petitionElement.innerHTML = `
-      <h3>${post.content.subject}</h3>
-      <p>${post.content.body}</p>
-      <button>자세히 보기</button>
-    `;
-    petitionList.appendChild(petitionElement);
+
+  // 섹션별 게시물 필터링 및 표시
+  data.sections.forEach(section => {
+    const sectionTitle = document.createElement('h2');
+    sectionTitle.innerText = section.title; // 섹션 제목 표시
+    petitionList.appendChild(sectionTitle);
+
+    const postsInSection = data.posts.filter(post => post.section_id === section.id);
+
+    postsInSection.forEach(post => {
+      const petitionElement = document.createElement('div');
+      petitionElement.classList.add('petition');
+      petitionElement.innerHTML = `
+        <h3>${post.content.subject}</h3>
+        <p>${post.content.body.substring(0, 100)}...</p> <!-- 100자까지 표시 -->
+        <button>자세히 보기</button>
+      `;
+      petitionList.appendChild(petitionElement);
+    });
   });
 })
 .catch(error => console.error('Error fetching Padlet posts:', error));
