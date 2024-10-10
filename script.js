@@ -25,10 +25,12 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts', {
         if (post.attributes && post.attributes.content) { // 객체 유효성 검사 추가
           const petitionElement = document.createElement('div');
           petitionElement.classList.add('petition');
+          const postUrl = post.webUrl && post.webUrl.live ? post.webUrl.live : '#'; // URL 유효성 검사
+
           petitionElement.innerHTML = `
             <h3>${post.attributes.content.subject || '제목 없음'}</h3>
             <p>${post.attributes.content.bodyHtml.replace(/<[^>]+>/g, '').substring(0, 100) || '내용 없음'}...</p>
-            <a href="${post.webUrl.live}" target="_blank">자세히 보기</a>
+            <a href="${postUrl}" target="_blank">자세히 보기</a>
           `;
           petitionList.appendChild(petitionElement);
         } else {
@@ -42,4 +44,4 @@ fetch('https://api.padlet.dev/v1/boards/uctz1iehqn3raj?include=posts', {
     petitionList.innerHTML = "<p>게시물이 없습니다.</p>"; // 게시물이 없을 때 메시지 표시
   }
 })
-.catch(error => console.error('Error fetching Padlet posts:', error));
+.catch(error => console.error('Error fetching Padlet posts:', e
