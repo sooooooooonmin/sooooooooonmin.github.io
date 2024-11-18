@@ -3,31 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>국민청원</title>
+  <title>로또 번호 예측기</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>국민청원</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">홈</a></li>
-        <li><a href="#petitions">청원 보기</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="petitions">
-    <h2>청원 목록</h2>
-    <div class="petition-list" id="petition-list">
-      <!-- 패들렛에서 가져온 청원 목록이 표시될 곳 -->
+  <div class="lotto-container">
+    <h1>🎉 로또 번호 예측기 🎉</h1>
+    <p>버튼을 눌러 오늘의 행운의 숫자를 확인하세요!</p>
+    <div class="lotto-balls">
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
+      <div class="ball" onclick="generateRandomNumber(this)">?</div>
     </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2024 국민청원</p>
-  </footer>
-
+    <button class="generate-btn" onclick="generateAllNumbers()">전체 번호 생성</button>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
