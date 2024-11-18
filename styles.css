@@ -1,70 +1,17 @@
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #6dd5ed, #2193b0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: white;
-  text-align: center;
-}
+document.getElementById("generate-btn").addEventListener("click", generateLottoNumbers);
 
-.container {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 20px 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
+function generateLottoNumbers() {
+  const balls = document.querySelectorAll(".ball");
+  const numbers = [];
 
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-}
+  while (numbers.length < 6) {
+    const randomNum = Math.floor(Math.random() * 45) + 1;
+    if (!numbers.includes(randomNum)) {
+      numbers.push(randomNum);
+    }
+  }
 
-p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-}
-
-.lotto-balls {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.ball {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ff9a9e, #fad0c4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.ball:hover {
-  transform: scale(1.2);
-  background: radial-gradient(circle, #a1c4fd, #c2e9fb);
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  color: #fff;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(90deg, #dd2476, #ff512f);
-  transform: scale(1.1);
+  balls.forEach((ball, index) => {
+    ball.textContent = numbers[index];
+  });
 }
