@@ -1,62 +1,70 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #f9d423, #ff4e50);
-  color: #fff;
-  text-align: center;
   margin: 0;
-  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-top: 20px;
+  font-size: 2.5em;
+  margin-bottom: 10px;
 }
 
-.lotto-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
 .lotto-balls {
   display: flex;
-  gap: 10px;
+  justify-content: space-around;
   margin: 20px 0;
 }
 
 .ball {
   width: 60px;
   height: 60px;
-  background: #fff;
-  color: #333;
-  font-size: 1.5rem;
-  font-weight: bold;
   border-radius: 50%;
+  background: radial-gradient(circle, #ff9a9e, #fad0c4);
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .ball:hover {
-  transform: scale(1.1);
-  background: #ffd700;
+  transform: scale(1.2);
+  background: radial-gradient(circle, #a1c4fd, #c2e9fb);
 }
 
-.generate-btn {
-  background: #28a745;
-  color: #fff;
+button {
   padding: 10px 20px;
+  font-size: 1.2em;
+  color: #fff;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.generate-btn:hover {
-  background: #218838;
+button:hover {
+  background: linear-gradient(90deg, #dd2476, #ff512f);
+  transform: scale(1.1);
 }
