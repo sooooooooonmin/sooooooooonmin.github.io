@@ -1,17 +1,90 @@
-document.getElementById("generate-btn").addEventListener("click", generateLottoNumbers);
+/* 전체 화면 스타일 */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
 
-function generateLottoNumbers() {
-  const balls = document.querySelectorAll(".ball");
-  const numbers = [];
+/* 컨테이너 */
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
 
-  while (numbers.length < 6) {
-    const randomNum = Math.floor(Math.random() * 45) + 1;
-    if (!numbers.includes(randomNum)) {
-      numbers.push(randomNum);
-    }
-  }
+/* 제목 스타일 */
+h1 {
+  font-size: 2.5em;
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
-  balls.forEach((ball, index) => {
-    ball.textContent = numbers[index];
-  });
+/* 설명 텍스트 */
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
+
+/* 로또 공 스타일 */
+.lotto-balls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ball {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffeb3b, #f9a825);
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.ball:hover {
+  transform: scale(1.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, #ffd700, #ffc107);
+}
+
+/* 버튼 스타일 */
+button {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background: linear-gradient(90deg, #dd2476, #ff512f);
+  transform: scale(1.1);
 }
