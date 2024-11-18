@@ -1,13 +1,17 @@
-// 개별 공의 번호를 랜덤하게 생성
-function generateRandomNumber(ball) {
-  const randomNumber = Math.floor(Math.random() * 45) + 1; // 1부터 45까지
-  ball.textContent = randomNumber;
-}
+document.getElementById("generate-btn").addEventListener("click", generateLottoNumbers);
 
-// 모든 공의 번호를 한번에 생성
-function generateAllNumbers() {
-  const balls = document.querySelectorAll('.ball');
-  balls.forEach(ball => {
-    generateRandomNumber(ball);
+function generateLottoNumbers() {
+  const balls = document.querySelectorAll(".ball");
+  const numbers = [];
+
+  while (numbers.length < 6) {
+    const randomNum = Math.floor(Math.random() * 45) + 1;
+    if (!numbers.includes(randomNum)) {
+      numbers.push(randomNum);
+    }
+  }
+
+  balls.forEach((ball, index) => {
+    ball.textContent = numbers[index];
   });
 }
